@@ -1,0 +1,268 @@
+{
+	"info": {
+		"_postman_id": "4d525ca9-6dd7-45c6-a913-af8618d8c184",
+		"name": "Clase Vueling",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26370849"
+	},
+	"item": [
+		{
+			"name": "pakeApi",
+			"item": [
+				{
+					"name": "getKakuna",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"status200(pm);\r",
+									"namePokemon(pm, \"kakuna\");\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PokeURL\n}}/v2/pokemon/{{PokeName}}",
+							"host": [
+								"{{PokeURL\n}}"
+							],
+							"path": [
+								"v2",
+								"pokemon",
+								"{{PokeName}}"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Primeros 151",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"incluyePoke = function(pm,pokeName){\r",
+									"        let respuesta = pm.response.json();\r",
+									"        let listaPoke = respuesta.results;\r",
+									"        let incluye = false;\r",
+									"\r",
+									"        listaPoke.forEach((pokemon)=>{\r",
+									"            if(pokemon.name === pokeName){\r",
+									"                incluye = true;\r",
+									"            }\r",
+									"        })\r",
+									"        \r",
+									"    pm.test(\"incluye el Pokemon\", function() {\r",
+									"        pm.expect(incluye).to.eql(true);\r",
+									"    })\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"incluyePoke(pm,\"pikachu\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{PokeURL\n}}/v2/pokemon?limit=151",
+							"host": [
+								"{{PokeURL\n}}"
+							],
+							"path": [
+								"v2",
+								"pokemon"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "151"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"namePokemon = function (pm, nombre) {",
+							"   pm.test(\"Test de nombre de pokemon\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.forms[0].name).to.eql(nombre);",
+							"        //pm.response.abilities[0].ability.name",
+							"    })",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "reqres",
+			"item": [
+				{
+					"name": "getPage2",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "post User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{requesURL}}users?page2",
+							"host": [
+								"{{requesURL}}users"
+							],
+							"query": [
+								{
+									"key": "page2",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change name",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{requesURL}}users?page2",
+							"host": [
+								"{{requesURL}}users"
+							],
+							"query": [
+								{
+									"key": "page2",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"status201 = function(pm){",
+							"    pm.test(\"Estado = 201\", function(){",
+							"        pm.response.to.have.status(201);",
+							"    })",
+							"}",
+							"",
+							"userName = function (pm,name){",
+							"    pm.test(\"Nombre de usuario eperado\", function(){",
+							"    let response = pm.response.json();",
+							"    pm.expect(response.name).to.eql(name);",
+							"    })",
+							"}"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"",
+					"status200 = function (pm) {",
+					"    pm.test(\"Status 200 OK\", function () {",
+					"        pm.response.to.have.status(200);",
+					"    })",
+					"}",
+					"",
+					"",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PokeName",
+			"value": "kakuna"
+		}
+	]
+}

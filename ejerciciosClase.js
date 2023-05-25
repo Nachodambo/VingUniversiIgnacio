@@ -27,7 +27,7 @@ mayorEdad(14);
 }esPrimo(4);*/
 
 // 3) hacer una lista de 10 numeros primos
-/*
+
 function esPrim(num){
 
     let primo = true;
@@ -37,21 +37,26 @@ function esPrim(num){
         }
     }
     if (primo === true){
-        return num;
-    }else return;
+        return true;
+    }else {return false};
     };
 
  function diezPrimos (){
     let numList =[];
     let x = 2;
     while (numList.length < 10){
-        if (esPrim(x)>1){
+        if(esPrim(x)===true){
+            numList.push(x);
+        }
+        x++;
+
+       /* if (esPrim(x)>1){
         numList.push(esPrim(x))}
-        x+=1;
+        x+=1;*/
     }
     console.log(numList);
 }diezPrimos();
-*/
+
 
 
 //4- Encontrar el número más grande en un array de números negativos y positivos
