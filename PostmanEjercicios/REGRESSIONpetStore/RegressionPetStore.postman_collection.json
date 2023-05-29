@@ -1,0 +1,735 @@
+{
+	"info": {
+		"_postman_id": "7260d10d-4ea7-4137-8b06-8268c71ae1e0",
+		"name": "RegressionPetStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26370849"
+	},
+	"item": [
+		{
+			"name": "UserCases",
+			"item": [
+				{
+					"name": "TC0- reguster user",
+					"item": [
+						{
+							"name": "register user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 10,\r\n  \"username\": \"{{nombreUsuario}}\",\r\n  \"firstName\": \"John\",\r\n  \"lastName\": \"James\",\r\n  \"email\": \"john@email.com\",\r\n  \"password\": \"{{userPassword}}\",\r\n  \"phone\": \"12345\",\r\n  \"userStatus\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{petURL}}/user",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"informacion de la respuesta es correcta\", function(){\r",
+											"    let jsonData = pm.response;\r",
+											"    pm.expect(jsonData.text()).to.include(\"username\");\r",
+											"})\r",
+											"\r",
+											"pm.test (\"Verificar username correcto\", function(){\r",
+											"    pm.expect(obtenerUserName(pm)).to.eql(pm.collectionVariables.get(\"nombreUsuario\"));\r",
+											"})\r",
+											"\r",
+											"status200oK(pm);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"obtenerUserName = function (pm){\r",
+											"    let jsonData = pm.response.json();\r",
+											"    let userName = jsonData.username;\r",
+											"    return userName;\r",
+											"\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/{{nombreUsuario}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"{{nombreUsuario}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC1-Login with username and password",
+					"item": [
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/login?username={{nombreUsuario}}&password={{userPassword}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"login"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{nombreUsuario}}"
+										},
+										{
+											"key": "password",
+											"value": "{{userPassword}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/logout",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC2- Verify Modify User",
+					"item": [
+						{
+							"name": "login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/login?username={{nombreUsuario}}&password={{userPassword}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"login"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "{{nombreUsuario}}"
+										},
+										{
+											"key": "password",
+											"value": "{{userPassword}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar usario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 10,\r\n  \"username\": \"{{nombreUsuario}}\",\r\n  \"firstName\": \"{{firstNameModificado}}\",\r\n  \"lastName\": \"{{lastNameModificado}}\",\r\n  \"email\": \"RDeniro@email.com\",\r\n  \"password\": \"{{userPassword}}\",\r\n  \"phone\": \"12345\",\r\n  \"userStatus\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{petURL}}/user/{{nombreUsuario}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"{{nombreUsuario}}"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "verificar modification",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"informacion de la respuesta es correcta\", function(){\r",
+											"    let jsonData = pm.response;\r",
+											"    pm.expect(jsonData.text()).to.include(\"username\");\r",
+											"})\r",
+											"\r",
+											"pm.test (\"Verificar username correcto\", function(){\r",
+											"    pm.expect(obtenerUserName(pm)).to.eql(pm.collectionVariables.get(\"nombreUsuario\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"que el nombre se modifico correctamete\", function(){\r",
+											"    pm.expect(obtenerFirstName(pm)).to.eql(pm.collectionVariables.get(\"firstNameModificado\"));\r",
+											"})\r",
+											"\r",
+											"pm.test(\"que el apellido se modifico correctamete\", function(){\r",
+											"    pm.expect(obtenerLastName(pm)).to.eql(pm.collectionVariables.get(\"lastNameModificado\"));\r",
+											"})\r",
+											"\r",
+											"status200oK(pm)"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"obtenerUserName = function (pm){\r",
+											"    let jsonData = pm.response.json();\r",
+											"    let userName = jsonData.username;\r",
+											"    return userName;\r",
+											"}\r",
+											"\r",
+											"obtenerFirstName = function (pm){\r",
+											"    let jsonData = pm.response.json();\r",
+											"    return (jsonData.firstName);\r",
+											"}\r",
+											"\r",
+											"obtenerLastName = function (pm){\r",
+											"    let jsonData = pm.response.json();\r",
+											"    return (jsonData.lastName);\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/{{nombreUsuario}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"{{nombreUsuario}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/logout",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC3-Verify Delete User",
+					"item": [
+						{
+							"name": "borrar usuario",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/{{nombreUsuario}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"{{nombreUsuario}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get user by name",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"usuarioBorrado(pm);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"usuarioBorrado = function(pm){\r",
+											"    pm.test(\"usuario borrado\",function (){\r",
+											"        pm.response.to.have.status(404);\r",
+											"    })\r",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/user/{{nombreUsuario}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"user",
+										"{{nombreUsuario}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PestoreOrderCases",
+			"item": [
+				{
+					"name": "TC0-Verify Create an order",
+					"item": [
+						{
+							"name": "Place an order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": {{orderId}},\r\n  \"petId\": {{petId}},\r\n  \"quantity\": {{quantity}},\r\n  \"shipDate\": \"2023-05-29T10:48:24.299Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{petURL}}/store/order",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"store",
+										"order"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify order was placed",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"obtenerOrderId = function(pm){\r",
+											"    let jsonData = pm.response.json().id;\r",
+											"    return jsonData;\r",
+											"}\r",
+											";\r",
+											"pm.environment.set(\"orderId\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\" verificar si el id es correcto\", function(){\r",
+											"    pm.expect(obtenerOrderId(pm)).to.eql(pm.variables.get(\"orderId\"))\r",
+											"})\r",
+											"status200oK(pm);\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/store/order/{{orderId}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"store",
+										"order",
+										"{{orderId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "TC1- Verify Delete order",
+					"item": [
+						{
+							"name": "Verify  order",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"obtenerOrderId = function(pm){\r",
+											"    let jsonData = pm.response.json().id;\r",
+											"    return jsonData;\r",
+											"}\r",
+											";\r",
+											"pm.environment.set(\"orderId\", 1);"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\" verificar si el id es correcto\", function(){\r",
+											"    pm.expect(obtenerOrderId(pm)).to.eql(pm.variables.get(\"orderId\"))\r",
+											"})\r",
+											"\r",
+											"status200oK(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/store/order/{{orderId}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"store",
+										"order",
+										"{{orderId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete order",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"status200oK(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/store/order/{{orderId}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"store",
+										"order",
+										"{{orderId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify order was Deleted",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"La orden fue eliminada\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"status200oK(pm);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{petURL}}/store/order/{{orderId}}",
+									"host": [
+										"{{petURL}}"
+									],
+									"path": [
+										"store",
+										"order",
+										"{{orderId}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "api_key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "1234",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"",
+					"status200oK = function(pm){",
+					"    pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"    })",
+					"};"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "nombreUsuario",
+			"value": "theUser"
+		},
+		{
+			"key": "firstNameModificado",
+			"value": "Robert",
+			"type": "string"
+		},
+		{
+			"key": "userPassword",
+			"value": "12345",
+			"type": "string"
+		},
+		{
+			"key": "lastNameModificado",
+			"value": "Deniro",
+			"type": "string"
+		},
+		{
+			"key": "orderId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "petId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "quantity",
+			"value": "7",
+			"type": "string"
+		}
+	]
+}
