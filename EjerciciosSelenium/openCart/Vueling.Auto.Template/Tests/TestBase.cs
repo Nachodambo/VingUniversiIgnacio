@@ -120,7 +120,7 @@ namespace OpenCart.Auto.Template.Tests
             test.Log(logstatus, "Test ended with " + logstatus + " Message: " + message + "<br/>" + stackTrace + "<br/><br/>", MediaEntityBuilder.CreateScreenCaptureFromPath(page.TakeScreenshot(SetUpFixtureBase.HTMLPath)).Build());
 
             page.TakeScreenshot(SetUpFixtureBase.HTMLPath);
-            //page.CloseDriver();
+            page.CloseDriver();
             Thread.Sleep(1000);
         }
     }
