@@ -31,7 +31,7 @@ namespace Demoblaze.Auto.Template.Tests
 
             [TestCase]
 
-            public void ChileBarna()
+            public void BCNaSCLticketRT()
             {
                 flyHome = new FlyHome(setUpWebDriver);
                 flyHome.acceptCookies();
