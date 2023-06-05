@@ -124,7 +124,14 @@ namespace OpenCart.Auto.Template.WebPages
         {
             get { return WebDriver.FindElementByXPath("(//textarea[@name='comment'])[2]"); }
         }
-        //metodos button-payment-method
+        //table[@class='table table-bordered']//a[text()='Canon EOS 5D']/following::button[contains(@class, 'btn-danger')][1]
+
+        private IWebElement btnDeleteItem(string item)
+        {
+            return WebDriver.FindElementByXPath("//table[@class='table table-bordered']//a[text()='"+ item +"']/following::button[contains(@class, 'btn-danger')][1]");
+        }
+
+        //metodos 
 
         public CheckoutPage completeStep2()
         {
@@ -185,6 +192,12 @@ namespace OpenCart.Auto.Template.WebPages
             
             btnTermsAndConds.Click();
             btnStep5Continue.Click();
+            return this;
+        }
+
+        public CheckoutPage deleteItem(string name) {
+
+            btnDeleteItem(name).Click();
             return this;
         }
 

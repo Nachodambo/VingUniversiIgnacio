@@ -41,6 +41,16 @@ namespace OpenCart.Auto.Template.WebPages
         {
             get { return WebDriver.FindElementById("button-cart"); }
         }
+        
+        private IWebElement optionsField
+        {
+            get { return WebDriver.FindElementById("input-option226"); }
+        }
+       
+        private IWebElement redOption
+        {
+            get { return WebDriver.FindElementByXPath("//option[@value='15']"); }
+        }
 
         //metodos
 
@@ -48,6 +58,8 @@ namespace OpenCart.Auto.Template.WebPages
         {
             new WebDriverWait(WebDriver, TimeSpan.FromSeconds(10)).Until(CustomExpectedConditions.ElementIsVisible(btnYourStore));
             btnAddToCart.Click();
+            optionsField.Click();
+            redOption.Click();
             btnsendToCart.Click();
             btnCart.Click();
             btnViewCart.Click();

@@ -91,7 +91,7 @@ namespace OpenCart.Auto.Template.Tests
         }
 
         [TestCase]
-        public void removeItemsfunctionality()
+        public void removeSecificItemfunctionality()
         {
             homePage = new HomePage(setUpWebDriver);
             registerPage = new RegisterPage(setUpWebDriver);
@@ -99,7 +99,7 @@ namespace OpenCart.Auto.Template.Tests
             iphonePage = new IphonePage(setUpWebDriver);
             macBookPage = new MacBookPage(setUpWebDriver);
             checkoutPage = new CheckoutPage(setUpWebDriver);
-             canonPage = new CanonPage(setUpWebDriver);
+            canonPage = new CanonPage(setUpWebDriver);
 
             homePage.entrarAPagina();
             homePage.clickRegister();
@@ -110,7 +110,7 @@ namespace OpenCart.Auto.Template.Tests
             iphonePage.goToStore();
             homePage.searchItem("canon");
             canonPage.AddAndGoToCart();
-
+            checkoutPage.deleteItem("Canon EOS 5D");
 
         }
 
