@@ -119,14 +119,25 @@ namespace Demoblaze.Auto.Template.WebPages
         {
             get { return WebDriver.FindElementByXPath("//section[@class='datepicker__month'][1]//div[@class='datepicker__day is-available '][1]"); }
         }
+     
 
-        private IWebElement diaRetorno(int fechaVuelta)
+        private IWebElement diaRetorno(int fecha)
 
         {
             //TERMINAR ESTO
-            return WebDriver.FindElementByXPath("//section[@class='datepicker__month'][1]//div[@class='datepicker__day is-available is-in-range']/div[text()='" + fechaVuelta+ "']"); 
+            return WebDriver.FindElementByXPath("//div[@class='datepicker__months']//section[@class='datepicker__month'][1]//div[@class='datepicker__days']//div[text()='"+fecha+"']");
+            
+                                                 //section[@class='datepicker__month'][1]//div[@class='datepicker__day is-available is-in-range']//div[text()='"+fecha+"']
         }
-        //div[@class='datepicker__day is-available']                                 //section[@class='datepicker__month']//div[text()='2']
+
+        //div[@data-field="child"]//div[@class='js-plus']
+
+        private IWebElement btnPlusCHL
+        {
+            get { return WebDriver.FindElementByXPath("( //div[@data-field='child']//div[@class='js-plus'])"); }
+        }
+
+
 
         //metodos
 
@@ -170,8 +181,9 @@ namespace Demoblaze.Auto.Template.WebPages
             btnBuscarVuelo.Click();
             return this;
         }
-
        
+
+      
 
         public FlyHome seleccionarOrigenYDestino(string cityOrigen, string cityDestino)
         {   
@@ -201,27 +213,32 @@ namespace Demoblaze.Auto.Template.WebPages
             
         }
 
-        public FlyHome seleccionarPrimerDiaDisponible()
+        public FlyHome seleccionarPrimerDiaDisponibleYvuelta()
         {
             string fechaIda = primerDiaDisponinble.Text;
+
+            int numeroVuelta = int.Parse(fechaIda) + 11;
+            string stringVuelta = numeroVuelta.ToString();
+            Console.WriteLine(stringVuelta);
             primerDiaDisponinble.Click();
-            int numeroIda = int.Parse(fechaIda);
-            int numeroVuenta = numeroIda + 11;
-            Console.WriteLine(numeroVuenta);
-            //string stringVuelta = numeroVuenta.ToString();
-
-
-
+            diaRetorno(numeroVuelta).Click();
             return this;
         }
 
-
-        public FlyHome clickearVuelta()
+        public FlyHome add3ADT1CHL()
         {
-            Console.WriteLine(primerDiaDisponinble.Text);
-            //diaRetorno(fechaVuelta()).Click();
+            for (int i = 0; i < 2; i++){
+                btnPlus.Click();
+            }
+            btnPlusCHL.Click();
+
+
+            btnListo.Click();
             return this;
         }
+
+
+
 
 
 

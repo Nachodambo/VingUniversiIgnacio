@@ -39,8 +39,10 @@ namespace Demoblaze.Auto.Template.Tests
                 string destino = "Santiago de Chile";
                 flyHome.seleccionarOrigenYDestino(origen, destino);
                 flyHome.entontrarMes("septiembre");
-                flyHome.seleccionarPrimerDiaDisponible();
-                
+                flyHome.seleccionarPrimerDiaDisponibleYvuelta();
+                flyHome.add3ADT1CHL();
+                flyHome.buscarVuelo();
+
                 //flyHome.clickearVuelta();
 
             }
