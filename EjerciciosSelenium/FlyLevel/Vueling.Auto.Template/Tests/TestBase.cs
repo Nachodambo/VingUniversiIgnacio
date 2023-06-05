@@ -67,12 +67,7 @@ namespace Demoblaze.Auto.Template.Tests
         protected ObjectsTest objectsTest;
         protected ExtentTest test;
         protected HomePage homePage;
-        protected Cart cart;
-        protected LogInPage logIn;
-        protected ItemPage itemPage;
-        protected PhonePage phonePage;
-        protected MonitorPage monitorPage;
-        protected LaptopPage laptopPage;
+        protected ItemPage itemPage;    
         protected FlyHome flyHome;
 
         #endregion
